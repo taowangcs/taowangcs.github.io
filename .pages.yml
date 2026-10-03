@@ -1,0 +1,110 @@
+media:
+  input: media
+  output: /media
+  extensions: [jpg, jpeg, png, webp]
+content:
+  - name: profile
+    label: 个人资料 / About
+    type: file
+    path: content/profile.json
+    format: json
+    fields:
+      - {name: name, label: 英文姓名, type: string, required: true}
+      - {name: chinese_name, label: 中文姓名, type: string}
+      - {name: role, label: 当前身份（英文）, type: string, required: true}
+      - {name: institution, label: 学校（英文）, type: string, required: true}
+      - name: email
+        label: 公开邮箱
+        type: string
+        required: true
+        pattern: '^[^\s@]+@[^\s@]+\.[^\s@]+$'
+      - name: github
+        label: GitHub 个人主页
+        type: string
+        pattern: '^https?://[^\s]+$'
+      - {name: photo, label: 个人照片, type: image, description: 上传照片后将自动替换首页的照片占位。}
+      - {name: biography, label: 个人简介（英文）, type: text, description: 空一行即可分段，不需要编写代码。}
+      - {name: interests, label: 研究兴趣（英文）, type: string, list: true}
+  - name: news
+    label: 近况 / News
+    type: file
+    path: content/news.json
+    format: json
+    fields:
+      - name: items
+        label: 近况条目
+        type: object
+        list:
+          collapsible: {collapsed: true, summary: '{fields.date} · {fields.text}'}
+        description: 点击添加条目，填写日期和内容；把最新条目放在最上方。
+        fields:
+          - {name: date, label: 日期（如 Oct. 2026）, type: string, required: true}
+          - {name: text, label: 近况内容（英文）, type: text, required: true}
+          - {name: url, label: 相关链接（可选）, type: string, pattern: '^https?://[^\s]+$'}
+  - name: education
+    label: 教育经历 / Education
+    type: file
+    path: content/education.json
+    format: json
+    fields:
+      - name: items
+        label: 教育经历
+        type: object
+        list:
+          collapsible: {collapsed: true, summary: '{fields.period} · {fields.degree}'}
+        description: 按希望展示的顺序排列，最新经历放在最上方。
+        fields:
+          - {name: period, label: 时间（如 Starting 2027）, type: string, required: true}
+          - {name: institution, label: 学校（英文）, type: string, required: true}
+          - {name: degree, label: 学位与专业（英文）, type: string, required: true}
+          - {name: details, label: 补充信息（如实验室和导师）, type: text}
+  - name: projects
+    label: 项目 / Projects
+    type: file
+    path: content/projects.json
+    format: json
+    fields:
+      - name: items
+        label: 项目条目
+        type: object
+        list:
+          collapsible: {collapsed: true, summary: '{fields.title}'}
+        fields:
+          - {name: title, label: 项目名称（英文）, type: string, required: true}
+          - {name: period, label: 时间, type: string}
+          - {name: description, label: 项目简介与个人贡献（英文）, type: text}
+          - {name: url, label: 项目链接（可选）, type: string, pattern: '^https?://[^\s]+$'}
+          - {name: code, label: 代码链接（可选）, type: string, pattern: '^https?://[^\s]+$'}
+  - name: publications
+    label: 论文 / Publications
+    type: file
+    path: content/publications.json
+    format: json
+    fields:
+      - name: items
+        label: 论文条目
+        type: object
+        list:
+          collapsible: {collapsed: true, summary: '{fields.title}'}
+        fields:
+          - {name: title, label: 论文标题, type: string, required: true}
+          - {name: authors, label: 作者（按论文顺序）, type: text, required: true}
+          - {name: venue, label: 会议或期刊与年份（预印本请明确注明）, type: string, required: true}
+          - {name: paper, label: 论文链接（可选）, type: string, pattern: '^https?://[^\s]+$'}
+          - {name: code, label: 代码链接（可选）, type: string, pattern: '^https?://[^\s]+$'}
+          - {name: project, label: 项目主页（可选）, type: string, pattern: '^https?://[^\s]+$'}
+  - name: awards
+    label: 荣誉 / Honors & Awards
+    type: file
+    path: content/awards.json
+    format: json
+    fields:
+      - name: items
+        label: 荣誉条目
+        type: object
+        list:
+          collapsible: {collapsed: true, summary: '{fields.year} · {fields.title}'}
+        fields:
+          - {name: year, label: 年份, type: string, required: true}
+          - {name: title, label: 荣誉名称（英文）, type: string, required: true}
+          - {name: organization, label: 颁发机构（英文）, type: string}

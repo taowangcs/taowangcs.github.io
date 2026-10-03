@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="$description">
+  <meta name="theme-color" content="#ffffff">
+  <title>$name | $chinese_name</title>
+  <link rel="canonical" href="https://taowangcs.github.io/">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%23274767'/%3E%3Ctext x='32' y='43' text-anchor='middle' font-family='Georgia,serif' font-size='35' fill='white'%3EW%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="page">
+    <aside class="sidebar">
+      <a class="site-name" href="#about">$name<span lang="zh">$chinese_name</span></a>
+      <nav aria-label="Main navigation">
+        <a href="#about">About</a>
+        <a href="#news">News</a>
+        <a href="#education">Education</a>
+        <a href="#projects">Projects</a>
+        <a href="#publications">Publications</a>
+        <a href="#awards">Honors &amp; Awards</a>
+      </nav>
+      <a class="sidebar-contact" href="$email_url">Email</a>
+    </aside>
+    <main id="main">
+      <section id="about" aria-labelledby="name">
+        <header class="profile">
+          <div class="profile-info">
+            <h1 id="name">$name <span lang="zh">$chinese_name</span></h1>
+            <p class="role">$role</p>
+            <p class="institution">$institution</p>
+            <div class="contact"><a href="$email_url">$email</a>$github_link</div>
+          </div>
+          $portrait
+        </header>
+        <h2>About</h2>
+        <div class="biography">$biography</div>
+        <h3>Research Interests</h3>
+        <ul class="interests">$interests</ul>
+      </section>
+      <section id="news" aria-labelledby="news-heading">
+        <h2 id="news-heading">News</h2>
+        $news
+      </section>
+      <section id="education" aria-labelledby="education-heading">
+        <h2 id="education-heading">Education</h2>
+        $education
+      </section>
+      <section id="projects" aria-labelledby="projects-heading">
+        <h2 id="projects-heading">Projects</h2>
+        $projects
+      </section>
+      <section id="publications" aria-labelledby="publications-heading">
+        <h2 id="publications-heading">Publications</h2>
+        $publications
+      </section>
+      <section id="awards" aria-labelledby="awards-heading">
+        <h2 id="awards-heading">Honors &amp; Awards</h2>
+        $awards
+      </section>
+      <footer><span>$name · Academic homepage</span><a href="https://app.pagescms.org/">Edit content</a></footer>
+    </main>
+  </div>
+</body>
+</html>
