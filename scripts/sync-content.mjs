@@ -12,8 +12,7 @@ export function syncContent(root = process.cwd()) {
   const link = (label, url) => /^https?:\/\//i.test(url || '')
     ? `[${label}](<${url.replace(/[<>\s]/g, encodeURIComponent)}>)` : '';
   const p = read('profile');
-  const sections = [['about', 'About'], ['news', 'News'], ['education', 'Education'],
-    ['projects', 'Projects'], ['publications', 'Publications'], ['awards', 'Honors & Awards']];
+  const sections = [['about', 'Homepage'], ['publications', 'Publications'], ['awards', 'Awards']];
   const photo = p.photo || '';
   if (photo && (!photo.startsWith('/media/') || photo.includes('..') || !fs.existsSync(path.join(root, photo)))) {
     throw new Error('The profile photo must be an existing file in /media/.');
@@ -34,7 +33,7 @@ export function syncContent(root = process.cwd()) {
   cards('education', 'Education', read('education').items.map(e => ({title: e.institution, subtitle: e.degree, date: e.period, content: e.details || ''})));
   cards('projects', 'Projects', read('projects').items.map(e => ({title: e.title, date: e.period || '', content: [e.description, [link('Project', e.url), link('Code', e.code)].filter(Boolean).join(' · ')].filter(Boolean).join('\n\n')})));
   cards('publications', 'Publications', read('publications').items.map(e => ({title: e.title, subtitle: e.venue, content: [text(e.authors), [link('Paper', e.paper), link('Code', e.code), link('Project', e.project)].filter(Boolean).join(' · ')].filter(Boolean).join('\n\n')})));
-  cards('awards', 'Honors & Awards', read('awards').items.map(e => ({title: e.title, date: e.year, subtitle: e.organization || ''})));
+  cards('awards', 'Awards', read('awards').items.map(e => ({title: e.title, date: e.year, subtitle: e.organization || ''})));
   fs.mkdirSync(path.join(root, 'public'), {recursive: true});
   fs.cpSync(path.join(root, 'media'), path.join(root, 'public/media'), {recursive: true});
   fs.writeFileSync(path.join(root, 'public/.nojekyll'), '');

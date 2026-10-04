@@ -19,10 +19,13 @@ function fixture(t) {
   return {root, save, read, profile};
 }
 
-test('empty CMS content builds all six sections without demo entries', t => {
+test('empty CMS content preserves content and exposes only the three requested pages', t => {
   const f = fixture(t);
   syncContent(f.root);
-  assert.equal(f.read('config').navigation.length, 6);
+  assert.deepEqual(f.read('config').navigation.map(n => [n.title, n.href]), [
+    ['Homepage', '/'], ['Publications', '/publications/'], ['Awards', '/awards/'],
+  ]);
+  assert.equal(f.read('config').features.enable_one_page_mode, false);
   assert.equal(f.read('config').author.name, 'Test Author');
   assert.equal(f.read('config').author.avatar, '/avatar-placeholder.svg');
   for (const name of ['education', 'projects', 'publications', 'awards']) {

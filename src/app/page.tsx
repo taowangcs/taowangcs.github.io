@@ -125,6 +125,17 @@ function loadPageDataForLocale(locale: string | undefined): HomePageLocaleData {
       id: 'about',
       sections: processSections(aboutConfig.sections || [], locale),
     }];
+    const newsConfig = getPageConfig<TextPageConfig>('news', locale);
+    if (newsConfig) {
+      pagesToShow.push({
+        type: 'text', id: 'news', config: newsConfig,
+        content: getMarkdownContent(newsConfig.source, locale),
+      });
+    }
+    for (const id of ['education', 'projects']) {
+      const config = getPageConfig<CardPageConfig>(id, locale);
+      if (config) pagesToShow.push({ type: 'card', id, config });
+    }
   }
 
   return {
