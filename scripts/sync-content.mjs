@@ -22,7 +22,7 @@ export function syncContent(root = process.cwd()) {
     site: { title: p.name, description: `${p.name} — ${p.role} at ${p.institution}. Research interests: ${(p.interests || []).join(', ')}.`, favicon: '/favicon.svg', last_updated: new Date().toLocaleDateString('en-US', {year: 'numeric', month: 'long', day: 'numeric', timeZone: 'Asia/Shanghai'}) },
     author: { name: [p.name, p.chinese_name].filter(Boolean).join(' · '), title: p.role, institution: p.institution, avatar: photo || '/avatar-placeholder.svg' },
     social: { email: p.email, github: p.github || '' },
-    features: { enable_likes: false, enable_one_page_mode: true },
+    features: { enable_likes: false, enable_one_page_mode: false },
     i18n: { enabled: false, default_locale: 'en', locales: ['en'], mode: 'fixed', fixed_locale: 'en', switcher: false },
     navigation: sections.map(([target, title]) => ({title, type: 'page', target, href: target === 'about' ? '/' : `/${target}/`}))
   });

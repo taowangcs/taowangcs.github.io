@@ -2,7 +2,7 @@
 
 网站：https://taowangcs.github.io/
 
-使用 [PRISM](https://github.com/xyjoey/PRISM) 模板（MIT License），保留英文单页和 Pages CMS 表单编辑。
+使用 [PRISM](https://github.com/xyjoey/PRISM) 模板（MIT License），使用英文多页面导航，保留 Pages CMS 表单编辑。
 
 ## 日常更新（手机也可以）
 
