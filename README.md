@@ -1,50 +1,41 @@
-# Tao Wang · Academic Homepage
+# Tao Wang · Academic homepage
 
-英文单页学术主页，使用 GitHub Pages 托管，Pages CMS 提供网页内容编辑。
+网站：https://taowangcs.github.io/
 
-目标地址：<https://taowangcs.github.io/>。
+使用 [PRISM](https://github.com/xyjoey/PRISM) 模板（MIT License），保留英文单页和 Pages CMS 表单编辑。
 
-## 日常更新（不需要改代码）
+## 日常更新（手机也可以）
 
-1. 打开 <https://app.pagescms.org/>，用 `taowangcs` 登录。
-2. 首次使用时，安装 Pages CMS GitHub App，仅选择 `taowangcs.github.io` 这个网站仓库。
-3. 打开网站仓库的 `main` 分支。左侧显示个人资料、近况、教育经历、项目、论文、荣誉六个编辑入口。
-4. 修改表单并保存。添加条目后，将最新的条目排在最上方。简介用空行分段，内容填写英文。
-5. 保存会触发自动发布。等待仓库 Actions 中的 `Publish academic homepage` 成功后，再刷新网站；更新不是即时生效的。
+1. 打开 https://app.pagescms.org/，使用 GitHub 登录，选择 `taowangcs/taowangcs.github.io` 和 `main`。
+2. 从左侧选择个人资料、近况、教育经历、项目、论文或荣誉。
+3. 修改后保存。GitHub Actions 会自动构建发布，通常需要几分钟。
+4. 打开主页刷新查看。若没有更新，在仓库 Actions 中查看最新运行是否成功。
 
-个人照片在“个人资料 / About”中上传；没有上传时，首页显示照片占位。项目、论文、荣誉在没有条目时保留栏目标题。图片支持 JPG、JPEG、PNG、WebP。
+个人照片可在“个人资料”中上传。暂时没有照片时显示 TW 占位图；没有条目的栏目保持占位，不添加虚构成果。
 
-不要向网站仓库或媒体库上传隐私资料。此仓库及网站均为公开内容。
+## 内容与模板
 
-## 首次部署
+- `content/*.json`：唯一的日常内容来源，由 Pages CMS 编辑。
+- `.pages.yml`：后台表单配置。
+- `scripts/sync-content.mjs`：构建时将 JSON 转为 PRISM 的 TOML / Markdown，并复制上传图片。
+- `src/`：PRISM 页面组件，保留原模板的布局、动画、深色模式。
+- `media/`：上传照片等资源；构建时复制至 `public/media/`。
+- `content/*.toml` 和 `content/*.md`：自动生成，请勿手动编辑，会被下一次构建覆盖。
 
-1. 在 `taowangcs` 下创建公开仓库 `taowangcs.github.io`，默认分支为 `main`。
-2. 上传本项目源文件（包括 `.pages.yml` 和 `.github/workflows/deploy.yml`）。
-3. 在仓库 **Settings → Pages → Build and deployment → Source** 选择 **GitHub Actions**。
-4. 在 **Actions → Publish academic homepage → Run workflow** 执行首次发布，或提交一次内容更新。
-5. 确认部署成功后访问目标网址，并完成 Pages CMS 首次登录。
+论文当前使用 PRISM 原生卡片显示，保留作者、会议/期刊和 Paper / Code / Project 链接，与原来的表单字段一致。模板内的 BibTeX 组件仍保留，但当前表单不生成 BibTeX，不使用论文筛选功能。
 
-## 本地预览
+## 本地开发
 
-只需要 Python 3，无需安装第三方依赖：
+需要 Node.js 22 或更新版本。
 
 ```sh
-python3 build.py
-python3 -m http.server 4173 --bind 127.0.0.1 --directory dist
+npm ci
+npm test
+npm run dev
 ```
 
-访问 <http://127.0.0.1:4173/>。修改内容或样式后重新执行 `python3 build.py` 并刷新浏览器。
+`npm run build` 生成静态网站到 `out/`，通过 `.github/workflows/deploy.yml` 发布到 GitHub Pages。
 
-## 文件说明
+模板改动：个人内容转换、照片占位、后台入口、使用本机字体替代模板作者的远程字体、手机教育卡片换行。未使用模板示例内容。旧版网站保留在 Git 提交历史中。
 
-- `content/*.json`：个人资料及各栏目的内容；由 Pages CMS 编辑。
-- `.pages.yml`：后台表单配置（官方文档：<https://pagescms.org/docs/configuration/>）。
-- `media/`：上传的照片。
-- `templates/index.html`、`assets/style.css`：网页结构与样式。
-- `build.py`：把内容生成为完整静态 HTML，文字内容不依赖 JavaScript。
-- `.github/workflows/deploy.yml`：自动构建与发布。
-- `dist/`：本地生成结果，不提交到仓库；线上只发布该目录。
-
-所有文本在构建时进行 HTML 转义，外部链接只接受 HTTP/HTTPS。构建失败时不会覆盖上一次成功发布的网站；可在 Actions 中查看出错信息。
-
-页面排版参考用户提供的学术主页，代码独立编写，未复制教师照片、校徽或论文条目。
+模板来源版本：`f2748db9821e98ed487eee5104ce4cc282aa8c1e`。保留上游 MIT 授权文件 `LICENSE`。
